@@ -1,14 +1,32 @@
 package fr.insa.lightsManagement.resources;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import fr.insa.lightsManagement.Light.Light;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 @RestController
 public class LightResource {
+	List<Light> lights = new ArrayList<>(); 
+	
+	public LightResource () {
+		RestTemplate restTemplate = new RestTemplate();
+		
+		Object rooms = restTemplate.
+		
+		// Simulate the DB with a list that contains the light of all rooms
+		for (Object room : ) {
+			lights.add(new Light(room.name, room.floor, false));			
+		}
+	}
+	
 	@GetMapping("/light")
 	public int lightID() {
 		return 20;
@@ -30,6 +48,13 @@ public class LightResource {
 	// Turn the light off
 	@GetMapping(value="/INSA/{building}/{roomID}/light/off")
 	public Light light_off(@PathVariable String building, @PathVariable int roomID) {
+		Light light = new Light(roomID, false);		
+		return light;
+	}
+	
+	// GetState
+	@GetMapping(value="/INSA/{building}/{roomID}/light/state")
+	public Light getState(@PathVariable String building, @PathVariable int roomID) {
 		Light light = new Light(roomID, false);		
 		return light;
 	}
