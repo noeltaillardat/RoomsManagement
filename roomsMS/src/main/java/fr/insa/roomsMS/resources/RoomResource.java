@@ -54,4 +54,31 @@ public class RoomResource {
 		return returned;
 	}
 
+	// Floor of a room
+	@CrossOrigin
+	@GetMapping("/INSA/{building}/{room}/floor")
+	public String getRoomFloor(@PathVariable String building, @PathVariable String room) {
+		String returned = "404";
+		for (Room aRoom : roomDB) {
+			if (aRoom.getName().equals(room) && aRoom.getBuilding().equals(building)) {
+				switch (aRoom.getFloor()) {
+					case 0:
+						returned = "rdc";
+						break;
+					case 1:
+						returned = "1st";
+						break;
+					case 2:
+						returned = "2nd";
+						break;
+					case 3:
+						returned = "3rd";
+						break;
+					default:
+						returned = aRoom.getFloor() + "th"; 	
+				}
+			}
+		}
+		return returned;
+	}
 }
