@@ -1,0 +1,8 @@
+!SESSION 2019-11-18 15:29:02.542 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_221
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fr_FR
+
+!ENTRY org.eclipse.osgi 4 0 2019-11-18 15:29:04.082
+!MESSAGE The -clean (osgi.clean) option was not successful. Unable to clean the storage area: C:\Users\noel\WorkspaceEE\RoomsManagement - Copie\mn-GEI-109\configuration\org.eclipse.osgi
