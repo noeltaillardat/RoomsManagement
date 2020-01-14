@@ -62,7 +62,7 @@ public class LightResource {
 					// roomID
 					"/" + building + "_" + room +
 					// getLight ('la' stands for 'latest')
-					"/cnt-light/ol"),
+					"/cnt-light/la"),
 				// extract state
 				"state");
 		} catch (IOException e) {
@@ -103,7 +103,7 @@ public class LightResource {
 					"/mn-" + building + "-" + floor + 
 					// roomID
 					"/" + building + "_" + room +
-					// getLight ('la' stands for 'latest')
+					// getLight
 					"/cnt-light",
 					
 					// state
@@ -111,7 +111,7 @@ public class LightResource {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return 0;
+			return 200;
 		}
 	}	
 }

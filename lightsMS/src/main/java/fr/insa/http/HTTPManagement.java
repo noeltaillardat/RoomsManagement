@@ -89,15 +89,24 @@ public class HTTPManagement {
 		String rep = "-1";
 		ans = ans.replaceFirst("</con>", "<con>");
 		String[] tmp = ans.split("<con>");
+		if (tmp.length < 2)
+			return "[ERROR] Extraction went wrong";
+		
 		ans = tmp[1];
 		tmp = ans.split(" name=&quot;" + name + "&quot;");
+		if (tmp.length < 2)
+			return "[ERROR] Extraction went wrong";
+		
 		ans = tmp[1];
 		tmp = ans.split("&quot;");
-		ans = tmp[1];
-		
-		if(ans.equals("-1")){
+		if (tmp.length < 2)
 			return "[ERROR] Extraction went wrong";
-		}
+		
+		ans = tmp[1];
+				
+		if(ans.equals("-1") || tmp.length < 2)
+			return "[ERROR] Extraction went wrong";
+		
 		rep = tmp[1];
 		return rep;
 	}
