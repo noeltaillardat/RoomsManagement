@@ -1,0 +1,9 @@
+!SESSION 2020-01-15 09:43:50.608 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_221
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fr_FR
+Command-line arguments:  -console
+
+!ENTRY org.eclipse.osgi 4 0 2020-01-15 09:43:53.814
+!MESSAGE Bundle reference:file:org.eclipse.om2m.ipe.sample_1.0.0.20171117-1334.jar@4 not found.
