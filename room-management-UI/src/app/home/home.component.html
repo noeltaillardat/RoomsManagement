@@ -1,0 +1,99 @@
+<mat-sidenav-container class="mat-typography">
+    <mat-sidenav mode="side" opened>
+
+        <h2>CONFIGURATION</h2>
+
+        <button mat-button (click)="refreshAll()">Refresh</button>
+        <br/><br/>
+
+        <!--  LIGHTS  -->
+        
+        <div class="line">
+            <strong>Lights</strong>
+            <span style="flex: 1 1 auto;"></span>
+            <mat-button-toggle-group>
+                <mat-button-toggle (click)="setActuatorsState('light', false)">
+                    <mat-icon style="color:#ccc;">brightness_2</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle (click)="setActuatorsState('light', true)">
+                    <mat-icon style="color:#00BFA5;">brightness_7</mat-icon>
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <mat-form-field class="time">
+            <input matInput placeholder="Switch ON"  [(ngModel)]="clockOn['light']" 
+            aria-label="24hr format" [ngxTimepicker]="lightON" [format]="24"  readonly/>
+            <mat-icon class="small" *ngIf="clockOn['light']==null" matSuffix>timer</mat-icon>
+            <button mat-button *ngIf="clockOn['light']!=null" matSuffix 
+                mat-icon-button aria-label="Clear" (click)="clockOn['light']=null">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <ngx-material-timepicker #lightON [theme]="primaryTheme"></ngx-material-timepicker>
+        <mat-form-field class="time">
+            <input matInput placeholder="Switch OFF"  [(ngModel)]="clockOff['light']" 
+            aria-label="24hr format" [ngxTimepicker]="lightOFF" [format]="24"  readonly/>
+            <mat-icon class="small" *ngIf="clockOff['light']==null" matSuffix>timer</mat-icon>
+            <button mat-button *ngIf="clockOff['light']!=null" matSuffix 
+                mat-icon-button aria-label="Clear" (click)="clockOff['light']=null">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <ngx-material-timepicker #lightOFF [theme]="darkTheme"></ngx-material-timepicker>
+        <br/><br/>
+
+
+        <!--  COMPUTER  -->
+        
+        <div class="line">
+            <strong>Computers</strong>
+            <span style="flex: 1 1 auto;"></span>
+            <mat-button-toggle-group>
+                <mat-button-toggle (click)="setActuatorsState('computer', false)">
+                    <mat-icon style="color:#ccc;">computer</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle (click)="setActuatorsState('computer', true)">
+                    <mat-icon style="color:#00BFA5;">computer</mat-icon>
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <mat-form-field class="time">
+            <input matInput placeholder="Switch ON"  [(ngModel)]="clockOn['computer']" 
+            aria-label="24hr format" [ngxTimepicker]="computerON" [format]="24"  readonly/>
+            <mat-icon class="small" *ngIf="clockOn['computer']==null" matSuffix>timer</mat-icon>
+            <button mat-button *ngIf="clockOn['computer']!=null" matSuffix 
+                mat-icon-button aria-label="Clear" (click)="clockOn['computer']=null">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <ngx-material-timepicker #computerON [theme]="primaryTheme"></ngx-material-timepicker>
+        <mat-form-field class="time">
+            <input matInput placeholder="Switch OFF"  [(ngModel)]="clockOff['computer']" 
+            aria-label="24hr format" [ngxTimepicker]="computerOFF" [format]="24"  readonly/>
+            <mat-icon class="small" *ngIf="clockOff['computer']==null" matSuffix>timer</mat-icon>
+            <button mat-button *ngIf="clockOff['computer']!=null" matSuffix 
+                mat-icon-button aria-label="Clear" (click)="clockOff['computer']=null">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <ngx-material-timepicker #computerOFF [theme]="darkTheme"></ngx-material-timepicker>
+        <br/><br/>
+
+        
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <h1>Rooms</h1>
+        <mat-spinner *ngIf="rooms.length === 0"></mat-spinner>
+
+        <div *ngIf="rooms.length !== 0" id="roomsPanel" style="padding: 13px; display: flex;">
+            <mat-expansion-panel expanded="true">
+                <mat-expansion-panel-header style="padding-top: 12px;">
+                    <mat-icon style="line-height: 32px;">memory</mat-icon>
+                    <h2 style="padding-left: 12px">GEI</h2>
+                </mat-expansion-panel-header>
+                <app-room-card *ngFor="let room of rooms" [room]="room"></app-room-card>
+            </mat-expansion-panel>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

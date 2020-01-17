@@ -1,0 +1,62 @@
+<mat-card class="rooms">
+
+    <mat-card-content>
+        <mat-card-title>{{getFullName()}}</mat-card-title>
+        <mat-card-subtitle>
+            {{room.building}} / {{getFloorAbbr()}} / {{getName()}}
+        </mat-card-subtitle>
+        <div *ngFor="let act of room.actuators" style="padding: 8px 0px">
+            <div style="display: flex">
+                <mat-icon 
+                    [color]="getColor(act.name, act.state)">{{getIcon(act.name)}}
+                </mat-icon>
+                &nbsp;{{getLabel(act.name)}}
+                <span style="flex: 1 1 auto;"></span>
+                <mat-slide-toggle
+                    [color]="getColor(act.name)"
+                    [checked]=act.state
+                    (change)="onToggle($event, act.name)" >
+                </mat-slide-toggle>
+            </div>
+                        
+            <mat-form-field class="time">
+                <input matInput placeholder=" "  aria-label="24hr format" [ngxTimepicker]="on" [format]="24"
+                [(ngModel)]="act.timeOn">
+                <mat-hint align="start">on</mat-hint>
+                <mat-icon class="small" *ngIf="act.timeOn==null" matSuffix>timer</mat-icon>
+                <span  *ngIf="act.timeOn!=null" matSuffix >
+                    <button mat-button mat-icon-button aria-label="Submit" (click)="onChanged(act.name, 'on', false)">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                    <button mat-button mat-icon-button aria-label="Clear" (click)="onChanged(act.name, 'on', true)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </span>
+            </mat-form-field>
+            <ngx-material-timepicker #on [theme]="primaryTheme"></ngx-material-timepicker>
+            &nbsp;&nbsp;
+            <mat-form-field class="time">
+                <input matInput placeholder=" "  [(ngModel)]="act.timeOff" 
+                aria-label="24hr format" [ngxTimepicker]="off" [format]="24">
+                <mat-hint align="start">off</mat-hint>
+                <mat-icon class="small" *ngIf="act.timeOff==null" matSuffix>timer</mat-icon>
+                <span  *ngIf="act.timeOff!=null" matSuffix >
+                    <button mat-button mat-icon-button aria-label="Submit" (click)="onChanged(act.name, 'off', false)">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                    <button mat-button mat-icon-button aria-label="Clear" (click)="onChanged(act.name, 'off', true)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </span>
+            </mat-form-field>
+            <ngx-material-timepicker #off [theme]="darkTheme"></ngx-material-timepicker>
+            
+        </div>
+        <div *ngFor="let sens of room.sensors">
+            <b>{{sens.name}}: </b>{{sens.value}}{{sens.unit}}
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button  style="display:block; margin:0 auto" (click)=deleteScheduled()>Reset parameters</button>
+    </mat-card-actions>
+</mat-card>

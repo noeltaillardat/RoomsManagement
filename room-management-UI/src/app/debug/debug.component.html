@@ -1,0 +1,182 @@
+<section class="mat-typography">
+    <markdown ngPreserveWhitespaces>
+        # Test & debug
+        Here is the list of the CRUD methods we implemented in our Microservices. They can be tested, to see
+        JSON results and validate the actual functionning of the User Interface, as well as the Microservices
+        themselves.
+
+        ## RoomMS
+
+        Running on server ```http://127.0.0.1:8091```
+    </markdown>
+    <form  (ngSubmit)="onSubmitGetRooms()">
+        <button type="submit" mat-stroked-button>
+            <mat-icon>get_app</mat-icon>&nbsp;&nbsp;Get all rooms
+        </button>
+        &nbsp;http://127.0.0.1:8091/all
+    </form>
+    <markdown [data]="resGetRooms | language : 'typescript'"></markdown>
+    <br />
+    <form  (ngSubmit)="onSubmitGetRoomsIds()">
+        <button type="submit" mat-stroked-button>
+            <mat-icon>get_app</mat-icon>&nbsp;&nbsp;Get all rooms' IDs
+        </button>
+        &nbsp;http://127.0.0.1:8091/all-id
+    </form>
+    <markdown [data]="resGetRoomIds | language : 'typescript'"></markdown>
+    <br />
+    <form  (ngSubmit)="onSubmitGetRoomFloor()">
+        <button type="submit" mat-stroked-button>
+            <mat-icon>get_app</mat-icon>&nbsp;&nbsp;Get a room's floor
+        </button>
+        &nbsp;http://127.0.0.1:8091/INSA/<mat-form-field class="short">
+            <input id="building" [(ngModel)]="building" name="building" matInput placeholder="building">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="room" [(ngModel)]="room" name="room" matInput placeholder="room">
+        </mat-form-field>/floor
+    </form>
+    <markdown [data]="resGetRoomFloor | language : 'typescript'"></markdown>
+
+    <markdown ngPreserveWhitespaces>
+        ## LightsMS
+        Running on server ```http://127.0.0.1:8082``` (actuators)
+    </markdown>
+
+    <form  (ngSubmit)="onSubmitGetActuator('light')">
+        <button type="submit" mat-stroked-button>
+            <mat-icon>get_app</mat-icon>&nbsp;&nbsp;Get state
+        </button>
+        &nbsp;http://127.0.0.1:8082/INSA/<mat-form-field class="short">
+            <input id="building" [(ngModel)]="building" name="building" matInput placeholder="building">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="room" [(ngModel)]="room" name="room" matInput placeholder="room">
+        </mat-form-field>/light
+    </form>
+    <markdown [data]="resGetActuator.light | language : 'typescript'"></markdown>
+
+    <form  (ngSubmit)="onSubmitSetActuator('light')">
+        <button type="submit" mat-stroked-button>
+            <mat-icon>send</mat-icon>&nbsp;&nbsp;Set state
+        </button>
+        &nbsp;http://127.0.0.1/INSA/<mat-form-field class="short">
+            <input id="building" [(ngModel)]="building" name="building" matInput placeholder="building">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="room" [(ngModel)]="room" name="room" matInput placeholder="room">
+        </mat-form-field>/light/<mat-form-field class="short">
+            <input id="state" [(ngModel)]="state" name="state" matInput placeholder="state">
+        </mat-form-field>
+    </form>
+    <markdown [data]="answer | language : 'typescript'"></markdown>
+
+    <form  (ngSubmit)="onSubmitGetActuatorTime('light')">
+        <button type="submit" mat-stroked-button>
+            <mat-icon>get_app</mat-icon>&nbsp;&nbsp;Get schedule 
+        </button>
+        &nbsp;http://127.0.0.1:8082/INSA/<mat-form-field class="short">
+            <input id="building" [(ngModel)]="building" name="building" matInput placeholder="building">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="room" [(ngModel)]="room" name="room" matInput placeholder="room">
+        </mat-form-field>/light/<mat-form-field class="short">
+            <input id="state" [(ngModel)]="state" name="state" matInput placeholder="state">
+        </mat-form-field>/scheduled
+    </form>
+    <markdown [data]="resGetActuatorTime.light | language : 'typescript'"></markdown>
+
+    <form  (ngSubmit)="onSubmitSetActuatorTime('light', 'on')">
+        <button type="submit" mat-stroked-button>
+            <mat-icon>send</mat-icon>&nbsp;&nbsp;Set schedule
+        </button>
+        &nbsp;http://127.0.0.1/INSA/<mat-form-field class="short">
+            <input id="building" [(ngModel)]="building" name="building" matInput placeholder="building">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="room" [(ngModel)]="room" name="room" matInput placeholder="room">
+        </mat-form-field>/light/<mat-form-field class="short">
+            <input id="state" [(ngModel)]="state" name="state" matInput placeholder="state">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="time" [(ngModel)]="time" name="time" matInput placeholder="12:30:00">
+        </mat-form-field>
+    </form>
+    <markdown [data]="answer | language : 'typescript'"></markdown>
+
+    <markdown ngPreserveWhitespaces>
+        ## ComputersMS
+        Running on server ```http://127.0.0.1:8083``` (actuators)
+        ## HeatersMS
+        Running on server ```127.0.0.1:8084``` (actuators)
+        ## WindowsMS
+        Running on server ```127.0.0.1:8085``` (actuators)
+        ## TemperatureMS
+        Running on server ```127.0.0.1:8086``` (sensors)
+    </markdown>
+    <br/>
+    <markdown ngPreserveWhitespaces>
+        # For any actuator
+    </markdown>
+
+    <form  (ngSubmit)="onSubmitGetActuator(actuator)">
+        <button type="submit" mat-stroked-button>
+            <mat-icon>get_app</mat-icon>&nbsp;&nbsp;Get state
+        </button>
+        &nbsp;http://127.0.0.1:8082/INSA/<mat-form-field class="short">
+            <input id="building" [(ngModel)]="building" name="building" matInput placeholder="building">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="room" [(ngModel)]="room" name="room" matInput placeholder="room">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="actuator" [(ngModel)]="actuator" name="roactuatorom" matInput placeholder="actuator">
+        </mat-form-field>
+    </form>
+    <markdown [data]="resGetActuator[actuator] | language : 'typescript'"></markdown>
+
+    <form  (ngSubmit)="onSubmitGetActuator('light')">
+        <button type="submit" mat-stroked-button>
+            <mat-icon>send</mat-icon>&nbsp;&nbsp;Set state
+        </button>
+        &nbsp;http://127.0.0.1:808X/INSA/<mat-form-field class="short">
+            <input id="building" [(ngModel)]="building" name="building" matInput placeholder="building">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="room" [(ngModel)]="room" name="room" matInput placeholder="room">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="actuator" [(ngModel)]="actuator" name="roactuatorom" matInput placeholder="actuator">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="state" [(ngModel)]="state" name="state" matInput placeholder="state">
+        </mat-form-field>
+    </form>
+    <markdown [data]="answer | language : 'typescript'"></markdown>
+
+    <form  (ngSubmit)="onSubmitGetActuatorTime('light')">
+        <button type="submit" mat-stroked-button>
+            <mat-icon>get_app</mat-icon>&nbsp;&nbsp;Get schedule
+        </button>
+        &nbsp;http://127.0.0.1:808X/INSA/<mat-form-field class="short">
+            <input id="building" [(ngModel)]="building" name="building" matInput placeholder="building">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="room" [(ngModel)]="room" name="room" matInput placeholder="room">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="actuator" [(ngModel)]="actuator" name="roactuatorom" matInput placeholder="actuator">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="state" [(ngModel)]="state" name="state" matInput placeholder="state">
+        </mat-form-field>/scheduled
+    </form>
+    <markdown [data]="resGetActuatorTime[actuator] | language : 'typescript'"></markdown>
+
+    <form  (ngSubmit)="onSubmitSetActuatorTime('light', 'on')">
+        <button type="submit" mat-stroked-button>
+            <mat-icon>send</mat-icon>&nbsp;&nbsp;Set schedule
+        </button>
+        &nbsp;&nbsp;&nbsp;http://127.0.0.1/INSA/<mat-form-field class="short">
+            <input id="building" [(ngModel)]="building" name="building" matInput placeholder="building">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="room" [(ngModel)]="room" name="room" matInput placeholder="room">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="actuator" [(ngModel)]="actuator" name="roactuatorom" matInput placeholder="actuator">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="state" [(ngModel)]="state" name="state" matInput placeholder="state">
+        </mat-form-field>/<mat-form-field class="short">
+            <input id="time" [(ngModel)]="time" name="time" matInput placeholder="12:30:00">
+        </mat-form-field>
+    </form>
+    <markdown [data]="answer | language : 'typescript'"></markdown>
+</section>
+<!--
+    </mat-sidenav-content>
+</mat-sidenav-container>-->

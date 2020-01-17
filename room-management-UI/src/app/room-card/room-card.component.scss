@@ -1,0 +1,32 @@
+mat-card.rooms {
+    margin: 12px;
+    width: 200px;
+    display: inline-block;
+    border-radius: 16px;
+    /*
+    background: rgb(255, 101, 152);
+    color: white;
+    box-shadow: #FF4081 0px 0px 8px 0px;
+    */
+    box-shadow: rgba($color: #000, $alpha: 0.2) 0px 0px 8px 0px;
+    color: #546E7A;
+}
+mat-card-title {
+    font-size: 16pt;
+    font-weight: 700;
+}
+mat-card-subtitle {
+    font-size: 11pt;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+mat-form-field.time {
+    width: calc(48% - 8px);
+}
+.small {
+    font-size: 14pt;
+    vertical-align: middle;
+}
+
+.timepicker-dial::before {
+    content: "test";
+}

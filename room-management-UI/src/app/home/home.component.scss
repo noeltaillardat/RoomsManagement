@@ -1,0 +1,34 @@
+section {
+    width: calc(100%-84px);
+}
+mat-sidenav, mat-sidenav-content {
+    padding: 32px;
+    height: calc(100vh - 64px);
+}
+div.mat-drawer-inner-container {
+    display: block;
+}
+
+mat-form-field.time {
+    width: 45%;
+    margin-right: 10px;
+}
+.mat-sidenav {
+    padding:16px;
+    width:320px;
+}
+strong {
+    padding-top: 14px;
+    font-size: 18pt;
+}
+
+.line {
+    display:flex; 
+    width: 100%;
+    margin-bottom: 8px;
+}
+.small {
+    font-size: 14pt;
+    vertical-align: middle;
+    color: #546E7A;
+}
