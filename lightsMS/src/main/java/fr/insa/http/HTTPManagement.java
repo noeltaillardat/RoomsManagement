@@ -111,12 +111,4 @@ public class HTTPManagement {
 		return rep;
 	}
 	
-
-	public static String getDate(){
-		 Calendar cal = Calendar.getInstance();
-		 String time= new SimpleDateFormat("dd MMM yyyy HH:mm:ss").format(cal.getTime());
-		 
-		 return time;
-	}
-	
 }

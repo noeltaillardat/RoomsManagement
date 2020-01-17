@@ -20,7 +20,10 @@ public class LightResource {
 	// Database of lights' states
 	static String IN_INSA = "http://127.0.0.1:8081/~";
 	static String ROOM_MS = "http://localhost:8091";
-	
+
+	// List of arrays to store the schedules
+	public static List<String[]> arrays = new ArrayList<String[]>();
+
 	public LightResource() {
 	}
 
@@ -49,7 +52,7 @@ public class LightResource {
 		RestTemplate restTemplate = new RestTemplate();
 		String floor =  restTemplate.getForObject(
 				ROOM_MS + "/INSA/" + building + "/" + room + "/floor", 
-				String.class);
+				String[].class)[0];
 
 		try {	
 			res = HTTPManagement.extractContent(
@@ -59,8 +62,8 @@ public class LightResource {
 					// MN corresponding to the floor of the good building
 					"/mn-cse-" + floor + 
 					"/mn-" + building + "-" + floor + 
-					// roomID
-					"/" + building + "_" + room +
+					// room
+					"/" + room +
 					// getLight ('la' stands for 'latest')
 					"/cnt-light/la"),
 				// extract state
@@ -78,7 +81,7 @@ public class LightResource {
 		RestTemplate restTemplate = new RestTemplate();
 		String floor =  restTemplate.getForObject(
 				ROOM_MS + "/INSA/" + building + "/" + room + "/floor", 
-				String.class);
+				String[].class)[0];
 		
 		if (floor.equals("404")) {
 			return 404;
@@ -101,8 +104,8 @@ public class LightResource {
 					// MN corresponding to the floor of the good building
 					"/mn-cse-" + floor + 
 					"/mn-" + building + "-" + floor + 
-					// roomID
-					"/" + building + "_" + room +
+					// 
+					"/" + room +
 					// getLight
 					"/cnt-light",
 					
@@ -114,4 +117,48 @@ public class LightResource {
 			return 200;
 		}
 	}	
+
+	//@GetMapping(path="/INSA/{building}/{room}/light/{state}/scheduled")
+	public String getLightStatusOnSchedule(@PathVariable String building, @PathVariable String room, @PathVariable String state) {
+		
+		for (String[] scheduled : arrays) {
+			// Searches for the building and the room that we want
+			if (scheduled[0].equals(building) && scheduled[1].equals(room)) {
+				// returns the state scheduled on that state or room
+				return scheduled[2];
+			}
+		}
+		// if the room doesn't have a schedule programmed
+		return "42:00:00";
+	}
+	
+		
+	// Timestamp format: xx:xx:xx
+	@GetMapping(path="/INSA/{building}/{room}/light/{state}/{timestamp}")
+	public void setLightStatusOnSchedule(@PathVariable String building, @PathVariable String room, @PathVariable String timestamp, @PathVariable String state) {
+		//Light light = lights.get(building + "/" + room);	
+		
+		//arrays.add(array_test);
+		boolean newSchedule = true;
+		
+		for (String[] scheduled : arrays) {
+			if (scheduled[0].equals(building) && scheduled[1].equals(room) && scheduled[2].equals(state)) {
+				scheduled[3] = timestamp;
+				newSchedule = false;
+				System.out.println("Array already exists!");
+			}
+		}
+		
+		if (newSchedule) {
+			// Creates an array with the room, the state and the timestamp	
+			String[] array_test = {building, room, state, timestamp};
+			arrays.add(array_test);
+			System.out.println("Schedule added to list");
+			System.out.println(array_test[3]);
+		}		
+
+	}
+			
+
 }
+
