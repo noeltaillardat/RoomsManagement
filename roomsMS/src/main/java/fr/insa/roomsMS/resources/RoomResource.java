@@ -16,14 +16,14 @@ public class RoomResource {
 
 	public RoomResource() {
 		// Database:
-		roomDB.add(new Room("GEI", 0, "PTP_Energy",		19, 1, 1));
-		roomDB.add(new Room("GEI", 0, "Foyer_du_GEI",	18, 1, 1));
-		roomDB.add(new Room("GEI", 0, "13",				 4, 3, 1));
-		roomDB.add(new Room("GEI", 0, "15",				 1, 3, 1));
-		roomDB.add(new Room("GEI", 0, "17",				 0, 1, 1));
-
-		roomDB.add(new Room("GEI", 1, "107",			 6, 2, 1));
-		roomDB.add(new Room("GEI", 1, "109",			 8, 2, 1));
+		roomDB.add(new Room("GEI", 0, "Foyer_du_GEI"));
+		roomDB.add(new Room("GEI", 0, "13"));
+		roomDB.add(new Room("GEI", 0, "15"));
+		roomDB.add(new Room("GEI", 1, "102"));
+		roomDB.add(new Room("GEI", 1, "107"));
+		roomDB.add(new Room("GEI", 1, "109"));
+		roomDB.add(new Room("GEI", 2, "213"));
+		roomDB.add(new Room("GEI", 2, "Learning_room"));
 	}
 	
 	// All rooms 
@@ -57,28 +57,31 @@ public class RoomResource {
 	// Floor of a room
 	@CrossOrigin
 	@GetMapping("/INSA/{building}/{room}/floor")
-	public String getRoomFloor(@PathVariable String building, @PathVariable String room) {
-		String returned = "404";
+	public List<String> getRoomFloor(@PathVariable String building, @PathVariable String room) {
+		List<String> returned = new ArrayList<>();	
+		
 		for (Room aRoom : roomDB) {
 			if (aRoom.getName().equals(room) && aRoom.getBuilding().equals(building)) {
 				switch (aRoom.getFloor()) {
 					case 0:
-						returned = "rdc";
+						returned.add("rdc");
 						break;
 					case 1:
-						returned = "1st";
+						returned.add("1st");
 						break;
 					case 2:
-						returned = "2nd";
+						returned.add("2nd");
 						break;
 					case 3:
-						returned = "3rd";
+						returned.add("3rd");
 						break;
 					default:
-						returned = aRoom.getFloor() + "th"; 	
+						returned.add(aRoom.getFloor() + "th"); 	
 				}
 			}
 		}
+		if (returned.size() == 0) 
+			returned.add("404");
 		return returned;
 	}
 }
