@@ -5,7 +5,9 @@ Proof-Of-Concept of a Web application managing the rooms of our department in IN
 ## Setting up the system
 
 First, let's have a look at the architecture depicted below:
-![service oriented architecture](/img/architecture.png)
+
+![service oriented architecture](/img/architecture.PNG)
+
 A service oriented architecture
 
 The microservices manage the smart building, whose actuators and sensors are connected through an IoT Middleware, [OM2M](https://www.eclipse.org/om2m/). We will first deploy them, then the actual microservices, and eventually, the user interface.
@@ -28,8 +30,11 @@ OM2M provides a useful user interface to visualize the different nodes and entit
 Here, an overview of this interface after running the IN, and then after running the MNs.
 
 First, let's have a look at the architecture depicted below:
-![IN](/img/1.png)
-![IN](/img/3.png)
+
+![IN](/img/1.PNG)
+
+![IN](/img/3.PNG)
+
 
 ### 1.2 OM2M (Application Entities & Content Instances)
 
@@ -37,11 +42,11 @@ Then, **Application Entities** (AE) have to be created, one for each of the room
 
 Here is the Node-RED project used to generate AEs and containers across OM2M.
 
-![Node-RED](/img/5.png)
+![Node-RED](/img/5.PNG)
 
 Back on OM2M webpage, we can see the AEs and their containers:
 
-![AE-cnt](/img/6.png)
+![AE-cnt](/img/6.PNG)
 
 ### 2. Microservices (MS)
 
@@ -70,13 +75,13 @@ The MSs use those ports:
 
 Finally, the User Interface (UI) can be deployed. It is developped using the framework angular. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6. 
 
-![UI](/img/ui.png)
+![UI](/img/ui.PNG)
 
 From inside the Angular project (room-management-UI), run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 Four tabs can be found in the app. The first one provide the actual RoomManagement pannel, with individual and global control of rooms. The second provides an overview of the REST requests implemented in our MSs, and some ways to run and test them. Third contains this READ.me and last one a short explanation on the context of this developement, and the purpose of the app.
 
-![Test](/img/test.png)
+![Test](/img/test.PNG)
 
 #### *For developpers*
 **Code scaffolding**
