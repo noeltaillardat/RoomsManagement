@@ -6,7 +6,7 @@ Proof-Of-Concept of a Web application managing the rooms of our department in IN
 
 First, let's have a look at the architecture depicted below:
 
-![architecture](https://raw.githubusercontent.com/noeltaillardat/RoomsManagement/master/img/architecture.PNG)
+![architecture](https://raw.githubusercontent.com/noeltaillardat/RoomsManagement/master/img/architecture.png)
 
 A service oriented architecture
 
